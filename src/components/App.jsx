@@ -7,6 +7,8 @@ import Loader from "./Loader/Loader";
 import SearchBar from "./SearchBar/SearchBar";
 import {getPhotos} from "../services/api";
 import {Toaster} from "react-hot-toast";
+import Section from "./Section/Section";
+import Container from "./Container/Container";
 
 function App() {
   const [photos, setPhotos] = useState([]);
@@ -64,15 +66,21 @@ function App() {
   };
 
   return (
-    <div>
+    <>
       <SearchBar setQuery={handleQuery} />
-      {results && <div>Not found results!</div>}
-      <Toaster position="top-right" reverseOrder={false} />
-      {!error ? <ImageGallery photos={photos} onClick={handleOpenModal} /> : <ErrorMessage />}
-      {isLoading && <Loader />}
-      {!isLoading && showLoadMore && !error && <LoadMore onClick={handleLoadMore} />}
+      <Section>
+        <Container>
+          {results && <div>Not found results!</div>}
+
+          {!error ? <ImageGallery photos={photos} onClick={handleOpenModal} /> : <ErrorMessage />}
+          {isLoading && <Loader />}
+          {!isLoading && showLoadMore && !error && <LoadMore onClick={handleLoadMore} />}
+        </Container>
+      </Section>
+
       {isOpen && <ImageModal isOpen={isOpen} onClose={closeModal} photoDetails={modalContent} />}
-    </div>
+      <Toaster position="top-right" reverseOrder={false} />
+    </>
   );
 }
 
