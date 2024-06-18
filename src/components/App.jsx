@@ -12,19 +12,25 @@ function App() {
   const [query, setQuery] = useState("");
   const [page, setPage] = useState(1);
   const [showLoadMore, setShowLoadMore] = useState(false);
+  const [isLoading, setIsLoading] = useState(false);
 
   useEffect(() => {
-    try {
-      const getData = async () => {
+    const getData = async () => {
+      try {
+        setIsLoading(true);
+
         const {total_pages, results} = await getPhotos({query, page});
         setPhotos((prev) => [...prev, ...results]);
         setShowLoadMore(total_pages > 1);
-      };
-      if (query) {
-        getData();
+      } catch (error) {
+        console.log(error);
+      } finally {
+        setIsLoading(false);
       }
-    } catch (error) {
-      console.log(error);
+    };
+
+    if (query) {
+      getData();
     }
   }, [query, page]);
 
@@ -41,9 +47,9 @@ function App() {
   return (
     <div>
       <SearchBar setQuery={handleQuery} />
-      <ImageGallery photos={photos} />
-      {showLoadMore && <LoadMore onClick={handleLoadMore} />}
-      <Loader />
+      {<ImageGallery photos={photos} />}
+      {isLoading && <Loader />}
+      {!isLoading && showLoadMore && <LoadMore onClick={handleLoadMore} />}
       <ErrorMessage />
       <ImageModal />
     </div>
