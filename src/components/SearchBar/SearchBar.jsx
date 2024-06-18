@@ -7,10 +7,18 @@ const SearchBar = ({setQuery}) => {
     setQuery(data.query);
   };
   return (
-    <form onSubmit={handleSubmit(onSubmit)}>
-      <input type="search" {...register("query")} placeholder="Search..." />
-      <button type="submit">Search</button>
-    </form>
+    <header>
+      <form onSubmit={handleSubmit(onSubmit)}>
+        <input
+          type="search"
+          {...register("query")}
+          placeholder="Search..."
+          autoComplete="off"
+          autoFocus
+        />
+        <button type="submit">Search</button>
+      </form>
+    </header>
   );
 };
 export default SearchBar;
