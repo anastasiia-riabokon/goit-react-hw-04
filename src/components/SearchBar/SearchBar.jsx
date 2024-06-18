@@ -1,5 +1,4 @@
 import {useForm} from "react-hook-form";
-import css from "./SearchBar.module.css";
 import toast from "react-hot-toast";
 import {CiSearch} from "react-icons/ci";
 
