@@ -6,6 +6,7 @@ import LoadMore from "./LoadMore/LoadMore";
 import Loader from "./Loader/Loader";
 import SearchBar from "./SearchBar/SearchBar";
 import {getPhotos} from "../services/api";
+import {Toaster} from "react-hot-toast";
 
 function App() {
   const [photos, setPhotos] = useState([]);
@@ -14,15 +15,17 @@ function App() {
   const [showLoadMore, setShowLoadMore] = useState(false);
   const [isLoading, setIsLoading] = useState(false);
   const [error, setError] = useState(false);
+  const [results, setResults] = useState(false);
 
   useEffect(() => {
     const getData = async () => {
       try {
         setIsLoading(true);
         setError(false);
-        const {total_pages, results} = await getPhotos({query, page});
+        const {total_pages, results, total} = await getPhotos({query, page});
         setPhotos((prev) => [...prev, ...results]);
         setShowLoadMore(total_pages > 1);
+        setResults(total !== 0);
       } catch (error) {
         setError(true);
       } finally {
@@ -47,8 +50,9 @@ function App() {
 
   return (
     <div>
-      <SearchBar setQuery={handleQuery} />
-      {photos.length !== 0 || !error ? <ImageGallery photos={photos} /> : <ErrorMessage />}
+      <SearchBar setQuery={handleQuery} found={results} />
+      <Toaster position="top-right" reverseOrder={false} />
+      {!error ? <ImageGallery photos={photos} /> : <ErrorMessage />}
       {isLoading && <Loader />}
       {!isLoading && showLoadMore && <LoadMore onClick={handleLoadMore} />}
       <ImageModal />
