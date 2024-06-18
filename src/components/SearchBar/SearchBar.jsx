@@ -2,7 +2,7 @@ import {useForm} from "react-hook-form";
 import css from "./SearchBar.module.css";
 import toast from "react-hot-toast";
 
-const SearchBar = ({setQuery, found}) => {
+const SearchBar = ({setQuery}) => {
   const {register, handleSubmit} = useForm();
   const onSubmit = (data) => {
     if (data.query.trim() === "") {
@@ -10,8 +10,6 @@ const SearchBar = ({setQuery, found}) => {
       return;
     }
     setQuery(data.query);
-
-    if (!found) return toast.error("Not found results");
   };
   return (
     <header>

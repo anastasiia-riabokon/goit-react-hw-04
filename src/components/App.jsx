@@ -16,6 +16,8 @@ function App() {
   const [isLoading, setIsLoading] = useState(false);
   const [error, setError] = useState(false);
   const [results, setResults] = useState(false);
+  const [isOpen, setIsOpen] = useState(false);
+  const [modalContent, setModalContent] = useState(null);
 
   useEffect(() => {
     const getData = async () => {
@@ -25,7 +27,10 @@ function App() {
         const {total_pages, results, total} = await getPhotos({query, page});
         setPhotos((prev) => [...prev, ...results]);
         setShowLoadMore(total_pages > 1);
-        setResults(total !== 0);
+        if (total == 0) {
+          setResults(true);
+          return;
+        }
       } catch (error) {
         setError(true);
       } finally {
@@ -48,14 +53,25 @@ function App() {
     setPage((prev) => prev + 1);
   };
 
+  const closeModal = () => {
+    setIsOpen(false);
+    setModalContent(null);
+  };
+
+  const handleOpenModal = (photo) => {
+    setIsOpen(true);
+    setModalContent(photo);
+  };
+
   return (
     <div>
-      <SearchBar setQuery={handleQuery} found={results} />
+      <SearchBar setQuery={handleQuery} />
+      {results && <div>Not found results!</div>}
       <Toaster position="top-right" reverseOrder={false} />
-      {!error ? <ImageGallery photos={photos} /> : <ErrorMessage />}
+      {!error ? <ImageGallery photos={photos} onClick={handleOpenModal} /> : <ErrorMessage />}
       {isLoading && <Loader />}
-      {!isLoading && showLoadMore && <LoadMore onClick={handleLoadMore} />}
-      <ImageModal />
+      {!isLoading && showLoadMore && !error && <LoadMore onClick={handleLoadMore} />}
+      {isOpen && <ImageModal isOpen={isOpen} onClose={closeModal} photoDetails={modalContent} />}
     </div>
   );
 }

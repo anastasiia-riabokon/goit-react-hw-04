@@ -7,7 +7,7 @@ export const getPhotos = async (option) => {
     params: {
       client_id: "NAdwF5ykUfPayD0HWbUShSHz1AdB1Y3WJNt6bg-UgLU",
       per_page: 15,
-      orientation: "portrait",
+      orientation: "landscape",
       ...option,
     },
   });
