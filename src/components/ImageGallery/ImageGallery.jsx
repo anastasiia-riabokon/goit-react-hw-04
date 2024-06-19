@@ -15,7 +15,7 @@ const ImageGallery = ({photos, onClick}) => {
       if (photoRef.current) {
         const heightEl = photoRef.current.getBoundingClientRect().height;
         window.scrollBy({
-          top: heightEl,
+          top: heightEl * 1.5,
           behavior: "smooth",
         });
       }
