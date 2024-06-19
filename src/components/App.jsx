@@ -27,6 +27,7 @@ function App() {
       try {
         setIsLoading(true);
         setError(false);
+        setResults(false);
         const {total_pages, results, total} = await getPhotos({query, page});
         setPhotos((prev) => [...prev, ...results]);
         setShowLoadMore(total_pages > 1);
