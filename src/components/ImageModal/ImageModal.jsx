@@ -14,7 +14,7 @@ const customStyles = {
     bottom: "auto",
     marginRight: "-50%",
     transform: "translate(-50%, -50%)",
-    width: "80%",
+    width: "70%",
     padding: "24px",
     borderRadius: "12px",
     boxShadow: "0 25px 50px rgba(0, 0, 0, 0.5), 0 10px 20px rgba(0, 0, 0, 0.3)",
@@ -31,8 +31,8 @@ const ImageModal = ({isOpen, onClose, photoDetails}) => {
     id: crypto.randomUUID(),
   }));
   return (
-    <Modal isOpen={isOpen} onRequestClose={onClose} style={customStyles} className="">
-      <div>
+    <Modal isOpen={isOpen} onRequestClose={onClose} style={customStyles}>
+      <div className="overflow-hidden">
         {photoDetails && (
           <>
             <ul className="flex gap-2 mb-2">
@@ -50,7 +50,12 @@ const ImageModal = ({isOpen, onClose, photoDetails}) => {
             </button>
 
             <div className="flex  max-md:items-center  max-md:flex-col gap-4">
-              <img src={src} alt={alt} className="rounded-xl max-w-md" />
+              <img
+                width={380}
+                src={src}
+                alt={alt}
+                className="rounded-xl max-sm:max-w-52 max-md:max-w-80"
+              />
 
               <div className="p-2">
                 <span className="flex items-center gap-3 font-play mb-3">
