@@ -5,6 +5,7 @@ export default {
     extend: {
       fontFamily: {
         play: ['"Playwrite FR Moderne"', "sans-serif"],
+        poiret: ["Poiret One", "sans-serif"],
       },
     },
   },

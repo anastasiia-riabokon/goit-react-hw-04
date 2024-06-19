@@ -9,6 +9,7 @@ import {getPhotos} from "../services/api";
 import {Toaster} from "react-hot-toast";
 import Section from "./Section/Section";
 import Container from "./Container/Container";
+import Notification from "./Notification/Notification";
 
 function App() {
   const [photos, setPhotos] = useState([]);
@@ -70,7 +71,7 @@ function App() {
       <SearchBar setQuery={handleQuery} />
       <Section>
         <Container>
-          {results && <div>Not found results!</div>}
+          {results && <Notification />}
 
           {!error ? <ImageGallery photos={photos} onClick={handleOpenModal} /> : <ErrorMessage />}
           {isLoading && <Loader />}
