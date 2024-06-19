@@ -1,4 +1,4 @@
-import {useState, useEffect} from "react";
+import {useState, useEffect, useRef} from "react";
 import ErrorMessage from "./ErrorMessage/ErrorMessage";
 import ImageGallery from "./ImageGallery/ImageGallery";
 import ImageModal from "./ImageModal/ImageModal";
@@ -31,6 +31,7 @@ function App() {
         const {total_pages, results, total} = await getPhotos({query, page});
         setPhotos((prev) => [...prev, ...results]);
         setShowLoadMore(total_pages > 1);
+
         if (total == 0) {
           setResults(true);
           return;
@@ -75,8 +76,8 @@ function App() {
       <Section>
         <Container>
           {results && <Notification />}
-
-          {!error ? <ImageGallery photos={photos} onClick={handleOpenModal} /> : <ErrorMessage />}
+          {photos.length > 0 && <ImageGallery photos={photos} onClick={handleOpenModal} />}
+          {error && <ErrorMessage />}
           {isLoading && <Loader />}
           {!isLoading && showLoadMore && !error && <LoadMore onClick={handleLoadMore} />}
         </Container>
