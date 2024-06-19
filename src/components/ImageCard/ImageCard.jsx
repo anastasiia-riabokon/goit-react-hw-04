@@ -1,4 +1,4 @@
-const ImageCard = ({alt_description, urls, onClick, likes, tags, description, links}) => {
+const ImageCard = ({alt_description, urls, onClick, likes, tags, description, links, user}) => {
   return (
     <>
       <img
@@ -12,6 +12,7 @@ const ImageCard = ({alt_description, urls, onClick, likes, tags, description, li
             tags,
             description,
             download: links.download,
+            user,
           })
         }
         className="shadow-lg shadow-neutral-400 hover:shadow-slate-500 transition-shadow duration-300 ease-in-out rounded-md cursor-pointer object-cover w-full h-full"
