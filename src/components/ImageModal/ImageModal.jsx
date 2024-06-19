@@ -54,11 +54,11 @@ const ImageModal = ({isOpen, onClose, photoDetails}) => {
                 width={380}
                 src={src}
                 alt={alt}
-                className="rounded-xl max-sm:max-w-52 max-md:max-w-80"
+                className="rounded-xl max-sm:max-w-52 max-md:max-w-80 h-full"
               />
 
               <div className="p-2">
-                <span className="flex items-center gap-3 font-play mb-3">
+                <span className="flex flex-wrap items-center gap-3 font-play mb-3">
                   <span className="flex">
                     <IoPersonCircleOutline size={24} color="#475569" />
                     <p>{user.name}</p>
