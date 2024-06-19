@@ -46,6 +46,7 @@ function App() {
 
     if (query) {
       getData();
+      setQuery("");
     }
   }, [query, page]);
 

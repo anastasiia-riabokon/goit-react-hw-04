@@ -5,16 +5,18 @@ import {CiSearch} from "react-icons/ci";
 import {RxCross1} from "react-icons/rx";
 
 const SearchBar = ({setQuery}) => {
-  const {register, handleSubmit} = useForm();
+  const {register, handleSubmit, reset} = useForm();
+  const [searchTerm, setSearchTerm] = useState("");
+
   const onSubmit = (data) => {
     if (data.query.trim() === "") {
       toast.error("Search field must not be empty");
       return;
     }
     setQuery(data.query);
+    setSearchTerm("");
+    reset();
   };
-
-  const [searchTerm, setSearchTerm] = useState("");
 
   const handleClearSearch = () => {
     setSearchTerm("");
