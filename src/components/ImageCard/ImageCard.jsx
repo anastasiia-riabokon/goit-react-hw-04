@@ -1,5 +1,3 @@
-import css from "./ImageCard.module.css";
-
 const ImageCard = ({alt_description, urls, onClick, likes, tags, description, links}) => {
   return (
     <>
