@@ -33,6 +33,8 @@ function App() {
         if (total == 0) {
           setResults(true);
           return;
+        } else {
+          setResults(false);
         }
       } catch (error) {
         setError(true);
